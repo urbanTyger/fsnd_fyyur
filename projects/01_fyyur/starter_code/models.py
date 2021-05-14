@@ -18,6 +18,20 @@ class Venue(db.Model):
     seeking_description = db.Column(db.String(200))
     shows = db.relationship('Show', backref='venue_shows', lazy=True)
 
+    def create(self):
+        db.session.add(self)
+        db.session.commit()
+    
+    def update(self):
+        db.session.merge(self)
+        db.session.commit()
+    
+    def close():
+        db.session.close()
+
+    def rollback():
+        db.session.rollback()
+
     def __repr__(self):
         return f'<Venue ID: {self.id}, name: {self.name}, city: {self.city}, state: {self.state}, genres: {self.genres}>'
 
@@ -38,6 +52,20 @@ class Artist(db.Model):
     seeking_description = db.Column(db.String(200))
     shows = db.relationship('Show', backref='artist_shows', lazy=True)
 
+    def create(self):
+        db.session.add(self)
+        db.session.commit()
+    
+    def update(self):
+        db.session.merge(self)
+        db.session.commit()
+    
+    def close():
+        db.session.close()
+
+    def rollback():
+        db.session.rollback()
+
     def __repr__(self):
         return f'<Artist ID: {self.id}, name: {self.name}, genres: {self.genres}>'
 
@@ -48,6 +76,20 @@ class Show(db.Model):
     artist_id = db.Column(db.Integer, db.ForeignKey('Artist.id'), nullable=False)
     venue_id = db.Column(db.Integer, db.ForeignKey('Venue.id'), nullable=False)
     start_time = db.Column(db.DateTime, nullable=False)
+
+    def create(self):
+        db.session.add(self)
+        db.session.commit()
+    
+    def update(self):
+        db.session.merge(self)
+        db.session.commit()
+    
+    def close():
+        db.session.close()
+
+    def rollback():
+        db.session.rollback()
 
     def __repr__(self):
         return f'<Artist ID: {self.artist_id}, VENUE ID: {self.venue_id}, Start Time: {self.start_time}>'
